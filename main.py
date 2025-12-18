@@ -1,25 +1,19 @@
-f = open("input1.txt", "r")
+with open("input2.txt", "r") as f:
+    content = f.read().strip()
 
-position = 50
-counter = 0
+sum = 0
+pairs = content.split(",")
 
-for line in f:
-    direction = line[0]
-    value = int(line[1:])
+for pair in pairs:
+    begin, end = pair.split("-")
+    for number in range(int(begin), int(end) + 1):
+        s = str(number)
+        lenght = len(s) 
+        mid = lenght // 2
+        if(lenght % 2 == 0):
+            esq = s[:mid]
+            dir = s[mid:]
+            if(esq == dir):
+                sum += number
 
-    for _ in range(value):
-        if direction == "L":
-            position -= 1
-        else:
-            position += 1
-        if position < 0:
-            position = 99
-        elif position > 99:
-            position = 0
-        if position == 0:
-            counter += 1
-
-print("Posição:", position)
-print("Resposta:", counter)
-
-f.close()
+print(sum)
